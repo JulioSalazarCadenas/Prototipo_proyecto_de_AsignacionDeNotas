@@ -1,0 +1,4 @@
+# Este prototipo solo usa la biblioteca estándar de Python (3.9+).
+# No hay dependencias externas todavía.
+# Cuando se agregue la interfaz web (RNF-04) en el Módulo 2, aquí
+# quedarán Flask/FastAPI u otra que el equipo decida.
