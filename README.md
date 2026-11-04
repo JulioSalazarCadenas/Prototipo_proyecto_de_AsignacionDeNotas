@@ -1,180 +1,111 @@
-# Sistema de Planeación de Horarios (SPH) — Prototipo
+# SPH – Sistema de Planeación de Horarios de Clases
 
-**Proyecto Núcleo 2 · Grupo 8 · Programa de Ingeniería de Sistemas · Universidad El Bosque · 2026-2**
+Proyecto Núcleo 2 (2026-2) · Universidad El Bosque · Programa de Ingeniería de Sistemas · Grupo 8
+Docente: Ing. Samuel Galindo Pinzón
 
-Integrantes: David Esteban Caicedo Saldaña, Santiago Granados Pascagaza, Johan Santiago
-Yepes Casallas, Julio César Salazar Cárdenas, Jhonatan Camilo Lozano Buitrago.
-Docente: Ing. Samuel Galindo Pinzón.
+El SPH **detecta** los conflictos de una propuesta de horario (restricciones duras RD-01 a RD-10), **recomienda**
+alternativas válidas, deja la **decisión al Coordinador** y **revalida**. Ningún movimiento puede crear un choque de
+docente, aula o grupo: el servicio lo bloquea antes de escribir en la base de datos.
 
-## Propósito
+Alcance real de esta entrega (M3): aplicación con **frontend** (interfaz web local de una pantalla: rejilla semanal,
+arrastrar y soltar, alternativas, resolución automática, parámetros y reglas), **backend** (servidor HTTP local con API
+JSON, `sph/web.py`) y **base de datos** SQLite. Debajo, motor de restricciones (patrón Strategy), resolutor de descenso
+estricto, servicio con bloqueo de choques, bitácora inmutable, importador CSV, exportación CSV/HTML y línea de comandos.
+**No** incluye autenticación ni perfiles, ni la API REST completa ni PostgreSQL de M2 (ver Documento 1, Acta de Cierre).
 
-Este repositorio contiene el prototipo del componente de software descrito en el
-**Informe de Ingeniería Parte I** del proyecto: un sistema que, dada una propuesta de
-horario del Programa de Ingeniería de Sistemas, **detecta conflictos** de restricciones
-duras y **recomienda alternativas** para resolverlos, siguiendo el ciclo
+## Documentación de la entrega
 
-```
-detectar → recomendar → (el Coordinador Académico elige) → revalidar
-```
-
-hasta llegar a un horario sin conflictos para las condiciones vigentes del semestre. El
-porqué de este enfoque (en vez de un optimizador global desde cero) está justificado en la
-Sección 1.3 del Informe M1: acotar el problema a las ~80 aulas propias del programa y a una
-estrategia de detección + recomendación por vecindario acotado lo hace viable en las doce
-semanas del curso.
-
-> **Estado: prototipo en evolución.** El repositorio tiene dos capas: el primer prototipo
-> del Módulo 1 (`src/`) y la extensión del Módulo 2 (`sph_m2/`, `db/`, `bench/`), que
-> reutiliza el primero sin modificarlo. Varias piezas (interfaz web, persistencia real,
-> selección interactiva) quedan para las siguientes iteraciones.
-
-## Qué hace hoy
-
-**Prototipo base (Módulo 1) — `src/`**
-
-- Modela docentes, aulas, sesiones y la propuesta de horario del semestre (`src/models.py`).
-- Detecta las diez restricciones duras identificadas en el Informe M1 —RD-01 a RD-10—
-  (`src/restricciones.py`), con complejidad polinomial (no es un buscador combinatorio).
-- Para cada conflicto, sugiere alternativas explorando un vecindario acotado (otra aula
-  compatible, otra franja del mismo docente) en vez de recalcular todo el horario
-  (`src/motor_recomendacion.py`).
-- Corre sobre un conjunto de datos de prueba con 10 docentes, 8 aulas y 20 asignaturas,
-  con conflictos insertados a propósito para poder verificar que el motor los detecta todos
-  (`src/datos_prueba.py`), tal como exige el criterio de prueba de la Sección 3.3 del informe.
-
-**Extensión (Módulo 2) — `sph_m2/`, `db/`, `bench/`, `ejemplos_cambio/`**
-
-- **Validador incremental** (`sph_m2/validador.py`, `sph_m2/reglas.py`, `sph_m2/indice.py`):
-  las reglas RD-01 a RD-10 se reimplementan como estrategias intercambiables (patrón
-  Strategy) registradas en un catálogo. Un índice de ocupación por docente, aula y grupo
-  evita comparar todos los pares de sesiones (O(n²)). Agregar una regla nueva es crear un
-  archivo `sph_m2/reglas_*.py`; el validador lo descubre solo, sin modificar código existente.
-- **Parámetros externalizados** (`sph_m2/parametros.py`): los valores de negocio (por ejemplo,
-  el tope de estudiantes) se leen de un JSON por semestre en lugar de estar fijos en el código
-  (RF-13, RNF-06).
-- **Resolutor iterativo** (`sph_m2/resolutor.py`): de descenso estricto con evaluación
-  incremental. En cada iteración genera candidatos para un conflicto, conserva solo los que
-  reducen el total de conflictos y elige uno según un criterio. Como el número de conflictos
-  baja en cada paso, termina en a lo sumo C0 iteraciones (C0 = conflictos iniciales) y
-  devuelve `SIN_CONFLICTOS` o `SIN_SOLUCION`.
-- **Criterios de recomendación intercambiables** (`sph_m2/criterios.py`): menor movimiento,
-  mantener aula, mantener docente y las reglas blandas RB-01 a RB-03 (evitar días
-  consecutivos, distribuir horas, minimizar huecos), combinables por prioridad.
-- **Esquema de base de datos** (`db/schema.sql`, `db/cargador.py`): modelo relacional del
-  sistema y un cargador que vuelca los datos de prueba en SQLite en memoria y los reconstruye
-  como `PropuestaHorario`, para verificar que el esquema es consistente con el modelo.
-- **Benchmark de escalabilidad** (`bench/`): generador de horarios sintéticos con conflictos
-  inyectados, una línea base ingenua (revalida copiando la propuesta completa con
-  `src/restricciones.py`) y las mediciones que la comparan con el enfoque incremental.
-- **Prueba de modificabilidad** (`ejemplos_cambio/`): una regla nueva (RD-11: un docente no
-  puede dictar más de N sesiones el mismo día) y un cambio de parámetros para 2027-1
-  (tope de estudiantes en 35), que se incorporan sin editar ningún archivo existente.
-
-## Qué NO hace todavía
-
-- No tiene interfaz web (RNF-04) — por ahora es un script de línea de comandos.
-- `main.py` sigue usando solo el prototipo base (`src/`); el validador y el resolutor de
-  `sph_m2/` se ejecutan desde las pruebas y el benchmark, no desde la CLI.
-- No hay base de datos persistente: el esquema SQL solo se valida sobre SQLite en memoria
-  y todavía no está conectado a la aplicación.
-- No permite seleccionar interactivamente una alternativa (RF-11): el prototipo base solo las
-  lista y el resolutor elige automáticamente según el criterio configurado.
-- Dos preguntas del juicio de expertos (P5: ¿validar todo el semestre o por sección?, P9:
-  ¿historial?) siguen abiertas y no están implementadas — ver Sección 6.4 del Informe M1.
-
-## Cómo ejecutarlo
-
-Requiere Python 3.9 o superior. El código no tiene dependencias externas (solo biblioteca
-estándar); `pytest` es necesario únicamente para correr la suite de pruebas.
-
-```bash
-python main.py
-```
-
-Esto imprime el estado de cada sesión (`[OK]` / `[CONFLICTO]`), el detalle de cada conflicto
-encontrado y las alternativas sugeridas para resolverlo.
-
-## Cómo correr las pruebas
-
-```bash
-pip install pytest
-python -m pytest tests/
-```
-
-La suite completa tiene 11 pruebas y tarda pocos segundos. La prueba original también se
-puede ejecutar sola, sin pytest:
-
-```bash
-python tests/test_motor_deteccion.py
-```
-
-| Archivo | Qué verifica |
+| Documento | Archivo |
 |---|---|
-| `test_motor_deteccion.py` | Los diez tipos de restricción (RD-01 a RD-10) se detectan sobre los datos de prueba y las sesiones sin conflicto no generan falsos positivos (RNF-02). |
-| `test_equivalencia.py` | El validador incremental de `sph_m2/` produce exactamente los mismos conflictos que el motor original de `src/`, tanto con los datos de prueba como con horarios aleatorios que ejercitan todas las reglas. |
-| `test_resolutor.py` | El cambio en el número de conflictos calculado de forma incremental coincide con el recálculo completo; el resolutor termina sin empeorar nunca el horario; y los criterios se intercambian sin tocar el resolutor. |
-| `test_esquema_sql.py` | Cargar los datos en el esquema SQL y leerlos de vuelta conserva los conflictos (salvo las diferencias esperadas por la normalización del esquema), y el esquema hace cumplir la integridad referencial y sus restricciones CHECK. |
-| `test_ingenuo_vs_incremental.py` | La optimización no cambia las decisiones: el resolutor incremental sigue la misma trayectoria (estado, iteraciones y candidatos evaluados) que la línea base ingenua. |
-| `test_prueba_de_cambio.py` | Agregar RD-11 y cambiar los parámetros a 2027-1 solo añade archivos nuevos (no modifica ninguno existente), y el sistema detecta con la regla y los parámetros nuevos manteniendo la evaluación incremental consistente. |
+| 1. Informe de Ingeniería | `PN2_Grupo8_Doc1_Informe.pdf` |
+| 2. Anexos Técnicos (UML y DER) | `PN2_Grupo8_Doc2_Anexos.pdf` |
+| 3. Manual Técnico (arquitectura, diccionario de datos, despliegue) | `PN2_Grupo8_Doc3_ManualTecnico.pdf` |
+| 4. Manual de Usuario | `PN2_Grupo8_Doc4_ManualUsuario.pdf` |
 
-## Cómo correr el benchmark
+## Requisitos
 
-Desde la raíz del repositorio (tarda cerca de un minuto):
+- Python 3.11 o superior (probado con 3.11, 3.12 y 3.13; el código no usa paquetes externos).
+- SQLite incluido en la biblioteca estándar de Python (probado con SQLite 3.45.1).
+- Solo para las pruebas: `pytest` (`requirements.txt`).
+
+## Instalación desde cero
 
 ```bash
-python -m bench.run_bench resultados.json
+git clone <URL-del-repositorio> sph && cd sph
+python3 -m venv .venv
+source .venv/bin/activate            # Windows: .venv\Scripts\activate
+pip install -r requirements.txt      # solo instala pytest
+python -m pytest -q                  # debe terminar en «64 passed» (o más)
 ```
 
-Imprime las mediciones en consola y guarda los resultados en `resultados.json`
-(entorno, detección, evaluación por candidato, resolución y variación del número de aulas).
-Si no se indica archivo de salida, usa `resultados.json` en el directorio actual.
+## Ejecutar la aplicación (interfaz web)
+
+```bash
+python main.py web --bd sph.db        # abre http://127.0.0.1:8000/ ; con --puerto 8001 cambia el puerto; --no-abrir no abre el navegador
+```
+
+Si la base no existe, la pantalla ofrece «Cargar datos de demostración» o subir sus tres CSV. Solo escucha en
+`127.0.0.1` (sin autenticación): no la exponga a una red. Ctrl+C detiene el servidor.
+
+## Uso rápido por línea de comandos (demostración con 10 docentes, 8 aulas y 20 sesiones)
+
+```bash
+python main.py importar --bd sph.db --carpeta datos/ejemplo --reemplazar   # crea la BD y carga los CSV
+python main.py validar  --bd sph.db                                        # 11 conflictos (RD-01 a RD-10)
+python main.py recomendar S16 --bd sph.db                                  # tres alternativas válidas
+python main.py recomendar S16 --aplicar 1 --bd sph.db                      # aplica la primera (queda en bitácora)
+python main.py mover S01 --dia Miércoles --hora 7 --bd sph.db              # «prueba de ruptura»: BLOQUEADO
+python main.py resolver --bd sph.db                                        # simulación (no guarda)
+python main.py resolver --aplicar --bd sph.db                              # resuelve y guarda
+python main.py deshacer --bd sph.db                                        # revierte el último cambio
+python main.py bitacora --bd sph.db                                        # historial de cambios
+python main.py exportar --formato html --salida horario.html --bd sph.db   # horario por grupo, docente y aula
+python main.py exportar --formato csv  --salida horario.csv  --bd sph.db
+python main.py reglas --desactivar RD-05 --bd sph.db                       # activar/desactivar reglas
+```
+
+Códigos de salida: `0` correcto · `1` error de uso o de datos · `2` movimiento bloqueado · `3` la propuesta tiene conflictos.
+
+## Formato de los CSV de entrada (carpeta `datos/ejemplo/`)
+
+- `docentes.csv`: `id, nombre, dedicacion, especialidad, disponibilidad` (`Lunes 7-13;Miércoles 7-13`; vacío = sin restricción).
+  Dedicaciones: `tiempo_completo`, `tres_cuartos`, `medio_tiempo`, `un_cuarto`.
+- `aulas.csv`: `id, nombre, capacidad, tecnologias, accesible` (tecnologías separadas por `;`: `computadores`, `video_beam`, `telepresencia`, `sillas_moviles`).
+- `sesiones.csv`: `codigo, curso, grupo, dia, hora_inicio, hora_fin, docente_id, aula_id, cupo, tecnologias`.
+
+La importación es **todo o nada**: si hay errores, se listan todos y no se escribe nada (ni se crea ni se borra ninguna base de datos). Si el archivo `--bd` ya existe, hay que usar `--reemplazar`; la base anterior solo se reemplaza cuando la importación es válida.
 
 ## Estructura del repositorio
 
 ```
-pn2-prototype/
-├── main.py                       # script de demostración (CLI, usa src/)
-├── requirements.txt
-├── src/                          # prototipo base (Módulo 1)
-│   ├── models.py                 # Docente, Aula, Sesión, PropuestaHorario
-│   ├── restricciones.py          # motor de detección (RD-01 a RD-10)
-│   ├── motor_recomendacion.py    # motor de recomendación de alternativas (RF-10)
-│   └── datos_prueba.py           # conjunto de datos de prueba
-├── sph_m2/                       # extensión (Módulo 2)
-│   ├── parametros.py             # parámetros de negocio por semestre
-│   ├── reglas.py                 # RD-01 a RD-10 como estrategias + registro
-│   ├── indice.py                 # índice de ocupación (contexto de validación)
-│   ├── validador.py              # validador incremental
-│   ├── criterios.py              # criterios de recomendación intercambiables
-│   └── resolutor.py              # resolutor de descenso estricto
-├── db/
-│   ├── schema.sql                # esquema relacional
-│   └── cargador.py               # carga/lectura sobre SQLite
-├── bench/
-│   ├── sintetico.py              # generador de horarios sintéticos
-│   ├── ingenuo.py                # línea base ingenua
-│   └── run_bench.py              # mediciones de escalabilidad
-├── ejemplos_cambio/
-│   ├── reglas_rd11.py            # regla RD-11 (ejemplo de extensión)
-│   └── parametros_2027-1.json    # parámetros de ejemplo para 2027-1
-└── tests/
-    ├── test_motor_deteccion.py
-    ├── test_equivalencia.py
-    ├── test_resolutor.py
-    ├── test_esquema_sql.py
-    ├── test_ingenuo_vs_incremental.py
-    └── test_prueba_de_cambio.py
+main.py            punto de entrada (CLI y servidor web)
+sph/               paquete del sistema (reglas, validador, resolutor, servicio, almacén, exportación, CLI, web.py, schema.sql)
+sph/static/        frontend de la interfaz web (index.html, app.js, estilos.css)
+src/               modelos del prototipo de M1 (Sesion, Docente, Aula…), sin modificar su semántica
+datos/ejemplo/     conjunto de demostración (CSV)
+tests/             64 pruebas automatizadas (pytest)
+qa/                scripts de calidad: bloqueo de choques, estrés, ablación, modificabilidad; logs en qa/logs/
+bench/             generador sintético y mediciones de escalabilidad
+ejemplos_cambio/   RD-11 y parámetros 2027-1 para la prueba de modificabilidad
 ```
 
-> `ejemplos_cambio/reglas_rd11.py` está fuera de `sph_m2/` a propósito: el validador carga
-> automáticamente todo archivo `sph_m2/reglas_*.py`, y esta regla es un ejemplo que solo se
-> activa copiándola ahí (así lo hace `test_prueba_de_cambio.py`).
+## Reproducir la evidencia de calidad
 
-## Trazabilidad con el Informe M1
+```bash
+python -m qa.bloqueo           # intentos de crear choques sobre un horario limpio (11 casos)
+python -m qa.modificabilidad   # escenarios de modificabilidad (4)
+python -m qa.ablacion 3000     # efecto del reintento de conflictos atascados
+python -m qa.estres qa/logs/estres.json   # 100 a 10 000 sesiones, extremo a extremo (tarda varios minutos)
+python -m qa.bench_final qa/logs/bench_final.json
+```
 
-El prototipo base cubre los requisitos RF-04 a RF-10 (detección y recomendación) sobre las
-restricciones RD-01 a RD-10 (Tabla 2 del informe). La extensión del Módulo 2 mantiene esas
-mismas restricciones, agrega los criterios de recomendación RB-01 a RB-03 y externaliza los
-parámetros de negocio (RF-13, RNF-06). El detalle completo de requisitos, restricciones y la
-matriz de trazabilidad está en el Informe de Ingeniería Parte I (Overleaf del equipo), no en
-este repositorio.
+## Mantenimiento
+
+Agregar una regla = crear `sph/reglas_rdNN.py` con una clase decorada `@regla("RD-NN")` (ver
+`ejemplos_cambio/reglas_rd11.py`); no se modifica ningún archivo existente. Los valores de negocio (tope de estudiantes,
+franja, receso, horas por dedicación) son datos de la base (tablas `parametro` y `dedicacion`). Detalle en el Documento 3.
+
+## Autoría
+
+Integrantes: David Esteban Caicedo Saldaña, Santiago Granados Pascagaza, Johan Santiago Yepes Casallas y
+Jhonatan Camilo Lozano Buitrago. Para el uso de herramientas de IA, ver el anexo del Documento 1.
