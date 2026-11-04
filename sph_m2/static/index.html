@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SPH · Planeación de horarios</title>
+<link rel="stylesheet" href="/static/estilos.css">
+</head>
+<body>
+<header class="barra">
+  <div class="marca"><span class="logo">SPH</span><div><strong>Planeación de horarios de clases</strong><small id="sub">Universidad El Bosque · Ingeniería de Sistemas</small></div></div>
+  <div class="estado" id="estado"></div>
+  <div class="acciones" id="acciones"></div>
+</header>
+<main id="app"><p class="cargando">Cargando…</p></main>
+<div id="toasts" aria-live="polite"></div>
+<div id="modal" class="modal" hidden><div class="modal-caja" role="dialog" aria-modal="true"><button class="cerrar" id="modal-cerrar" aria-label="Cerrar">×</button><div id="modal-cuerpo"></div></div></div>
+<script src="/static/app.js"></script>
+</body>
+</html>
