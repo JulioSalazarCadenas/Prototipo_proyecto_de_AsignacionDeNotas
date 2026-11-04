@@ -198,7 +198,7 @@ def test_exportar_html_tiene_las_tres_vistas_y_resalta_conflictos(tmp_path):
     html = open(exportar.exportar_html(sv, str(tmp_path / "h.html")), encoding="utf-8").read()
     for titulo in ("Por grupo", "Por docente", "Por aula"):
         assert titulo in html
-    assert "Conflictos abiertos: 11" in html and 'class="mal"' in html
+    assert "Conflictos abiertos: 11" in html and 'class="ses mal"' in html
     sv.resolver_auto(aplicar=True)
     html2 = open(exportar.exportar_html(sv, str(tmp_path / "h2.html")), encoding="utf-8").read()
     assert "Conflictos abiertos: 4" in html2
