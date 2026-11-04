@@ -1,7 +1,8 @@
 __pycache__/
 *.pyc
+.venv/
 .pytest_cache/
-.vscode/
-.idea/
-venv/
-.env
+*.db
+horario.html
+horario.csv
+qa/logs/estres_tmp/
