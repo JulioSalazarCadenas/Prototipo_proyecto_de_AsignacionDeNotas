@@ -4,9 +4,9 @@ import copy, time
 from dataclasses import replace
 from src.models import PropuestaHorario
 from src.restricciones import detectar_todos
-from sph_m2.criterios import Movimiento, MenorMovimiento
-from sph_m2.parametros import Parametros
-from sph_m2.resolutor import Resolutor, horas_de_inicio
+from sph.criterios import Movimiento, MenorMovimiento
+from sph.parametros import Parametros
+from sph.resolutor import Resolutor, horas_de_inicio
 
 
 def evaluar_candidato(prop, docentes, aulas, mov):
