@@ -35,7 +35,7 @@ git clone <URL-del-repositorio> sph && cd sph
 python3 -m venv .venv
 source .venv/bin/activate            # Windows: .venv\Scripts\activate
 pip install -r requirements.txt      # solo instala pytest
-python -m pytest -q                  # debe terminar en «64 passed» (o más)
+python -m pytest -q                  # debe terminar en «65 passed» (o más)
 ```
 
 ## Ejecutar la aplicación (interfaz web)
@@ -44,7 +44,7 @@ python -m pytest -q                  # debe terminar en «64 passed» (o más)
 python main.py web --bd sph.db        # abre http://127.0.0.1:8000/ ; con --puerto 8001 cambia el puerto; --no-abrir no abre el navegador
 ```
 
-Si la base no existe, la pantalla ofrece «Cargar datos de demostración» o subir sus tres CSV. Solo escucha en
+Si la base no existe, la pantalla ofrece la demostración ampliada (30 docentes, 20 aulas, 73 sesiones, 14 conflictos), la pequeña (10 / 8 / 20, 11 conflictos) o subir sus tres CSV. El botón «Cargar datos» de la barra vuelve a abrir esas opciones (reemplaza los datos actuales). Solo escucha en
 `127.0.0.1` (sin autenticación): no la exponga a una red. Ctrl+C detiene el servidor.
 
 ## Uso rápido por línea de comandos (demostración con 10 docentes, 8 aulas y 20 sesiones)
@@ -82,8 +82,9 @@ main.py            punto de entrada (CLI y servidor web)
 sph/               paquete del sistema (reglas, validador, resolutor, servicio, almacén, exportación, CLI, web.py, schema.sql)
 sph/static/        frontend de la interfaz web (index.html, app.js, estilos.css)
 src/               modelos del prototipo de M1 (Sesion, Docente, Aula…), sin modificar su semántica
-datos/ejemplo/     conjunto de demostración (CSV)
-tests/             64 pruebas automatizadas (pytest)
+datos/ejemplo/     conjunto de demostración pequeño (CSV: 10 docentes, 8 aulas, 20 sesiones)
+datos/ampliado/    conjunto ampliado (30 docentes, 20 aulas, 73 sesiones); lo genera datos/generar_ampliado.py
+tests/             65 pruebas automatizadas (pytest)
 qa/                scripts de calidad: bloqueo de choques, estrés, ablación, modificabilidad; logs en qa/logs/
 bench/             generador sintético y mediciones de escalabilidad
 ejemplos_cambio/   RD-11 y parámetros 2027-1 para la prueba de modificabilidad
