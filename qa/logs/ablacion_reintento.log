@@ -1,0 +1,7 @@
+instancias: 3000; conflictos iniciales (suma): 32782
+instancias donde el reintento se usó: 362
+instancias con menos pendientes gracias al reintento: 262
+instancias con MÁS pendientes con reintento (el camino de descenso difiere): 6
+'SIN_SOLUCION falsos' evitados (sin reintento no resuelve; con reintento sí, 0 pendientes): 164
+pendientes totales: con reintento 2849; sin reintento 3145
+tiempo total del resolutor: con reintento 19.14 s; sin reintento 17.71 s

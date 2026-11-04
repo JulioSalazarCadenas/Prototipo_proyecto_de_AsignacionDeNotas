@@ -1,0 +1,35 @@
+[OK] RD-01 · Mover S01 al miércoles 7h, cuando su docente D01 ya dicta S11
+       bloqueado=True reglas=['RD-01', 'RD-02'] BD/memoria/bitácora intactas=True
+       [RD-01] El docente D01 tiene dos sesiones cruzadas (sesiones: S01, S11)
+       [RD-02] El aula A01 tiene dos sesiones cruzadas (sesiones: S01, S11)
+[OK] RD-02 · Mover S01 al aula A02, ocupada el lunes 7-9 por S03
+       bloqueado=True reglas=['RD-02'] BD/memoria/bitácora intactas=True
+       [RD-02] El aula A02 tiene dos sesiones cruzadas (sesiones: S01, S03)
+[OK] RD-03 · Mover S02 al lunes 7h: el grupo SIS-3A ya tiene S01 en ese bloque
+       bloqueado=True reglas=['RD-03'] BD/memoria/bitácora intactas=True
+       [RD-03] El grupo SIS-3A tiene cruce entre Estructuras de Datos y Bases de Datos I (sesiones: S01, S02)
+[OK] RD-04 · Mover S01 a las 11h (11-13 cruza el receso 12-13)
+       bloqueado=True reglas=['RD-04'] BD/memoria/bitácora intactas=True
+       [RD-04] Sesión S01 cae en el receso 12m-1pm (sesiones: S01)
+[OK] RD-04 · Mover S01 a las 21h (21-23 sale de la franja 7-22)
+       bloqueado=True reglas=['RD-04'] BD/memoria/bitácora intactas=True
+       [RD-04] Sesión S01 fuera de la franja institucional (sesiones: S01)
+[OK] RD-05 · Mover S03 al jueves: la docente D03 solo declaró lunes, miércoles y viernes
+       bloqueado=True reglas=['RD-05'] BD/memoria/bitácora intactas=True
+       [RD-05] Sesión S03 fuera de la disponibilidad declarada por Diana Ruiz (sesiones: S03)
+[OK] RD-06 · Mover S01 (40 estudiantes) al aula A05 de capacidad 20
+       bloqueado=True reglas=['RD-06'] BD/memoria/bitácora intactas=True
+       [RD-06] Sesión S01 espera 40 estudiantes pero el aula Salón 205 tiene capacidad 20 (sesiones: S01)
+[OK] RD-07 · Alargar S01 a 3 horas (7-10)
+       bloqueado=True reglas=['RD-07'] BD/memoria/bitácora intactas=True
+       [RD-07] Sesión S01 dura 3h, se esperaban 2h (sesiones: S01)
+[OK] RD-10 · Mover S02 (requiere computadores) al aula A01, que no los tiene
+       bloqueado=True reglas=['RD-10'] BD/memoria/bitácora intactas=True
+       [RD-10] Aula Salón 301 no tiene la tecnología requerida por S02: computadores (sesiones: S02)
+[OK] RD-09 · Con D06 ya en 4 h, asignarle S11 (2 h más = 6 h > 5 h de 1/4 de tiempo)
+       bloqueado=True reglas=['RD-09'] BD/memoria/bitácora intactas=True
+       [RD-09] Germán Salas tiene 6h asignadas, excede su dedicación (5h/semana) (sesiones: S01, S06, S11)
+[OK] CONTROL · Mover S01 al martes 14h (libre) se aplica y queda en bitácora (cambio #1)
+[NOTA] RD-08 (tope de estudiantes) depende del cupo de la sección, que ningún movimiento modifica; se verifica en la detección (tests/test_servicio.py::test_rd08_se_detecta_en_datos_importados).
+
+Resumen: 11/11 casos OK

@@ -1,0 +1,25 @@
+M-1  Estímulo: la dirección exige una regla nueva RD-11 (máx. 3 sesiones por docente y día).
+     Respuesta: archivos existentes modificados = 0; archivos nuevos = 1 (sph/reglas_rd11.py); líneas no vacías del archivo nuevo = 13
+     Medida: sin tocar ningún archivo, RD-11 se descubre sola y también bloquea movimientos en el servicio (0.07 s)
+       > reglas activas: ['RD-01', 'RD-02', 'RD-03', 'RD-04', 'RD-05', 'RD-06', 'RD-07', 'RD-08', 'RD-09', 'RD-10', 'RD-11']
+       > tercera sesión de D01 el lunes: permitida
+       > cuarta sesión bloqueada por: ['RD-11']
+
+M-2  Estímulo: para 2027-1 el tope de estudiantes baja de 40 a 35.
+     Respuesta: 1 fila INSERT en la tabla parametro; archivos de código modificados = 0; tiempo = 0.4 ms
+     Medida: conflictos con el mismo horario: tope 40 -> 11; tope 35 (límite 38) -> 15
+
+M-3  Estímulo: Talento Humano confirma que la dedicación de 1/4 de tiempo es de 6 h (no 5 h).
+     Respuesta: 1 UPDATE sobre dedicacion (única fuente de horas máximas); código modificado = 0
+     Medida: RD-09 pasa de 1 a 0; total 11 -> 10
+
+M-4  Estímulo: el Coordinador quiere priorizar otro criterio de recomendación para S16.
+     menor-movimiento           -> Martes 13h aula A08 docente D02
+     mantener-aula              -> Lunes 10h aula A08 docente D02
+     mantener-docente           -> Martes 13h aula A01 docente D02
+     huecos                     -> Jueves 7h aula A01 docente D02
+     distribuir-horas           -> Jueves 7h aula A01 docente D02
+     menor-movimiento,huecos    -> Martes 13h aula A08 docente D02
+     Respuesta/medida: cambiar de criterio = 1 opción de línea de comandos (--criterio); código modificado = 0
+
+Resumen: 4/4 escenarios cumplidos
