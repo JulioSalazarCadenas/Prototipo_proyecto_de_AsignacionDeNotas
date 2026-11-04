@@ -1,5 +1,5 @@
 """RD-11 (ejemplo de cambio 2027-1): un docente no puede dictar más de N sesiones el mismo día."""
-from sph_m2.reglas import regla, ReglaRestriccion, DOCENTE
+from sph.reglas import regla, ReglaRestriccion, DOCENTE
 from src.restricciones import Conflicto
 
 

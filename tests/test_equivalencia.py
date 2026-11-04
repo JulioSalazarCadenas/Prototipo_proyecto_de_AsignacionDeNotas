@@ -3,9 +3,9 @@ import random
 from src.datos_prueba import crear_docentes, crear_aulas, crear_propuesta_horario
 from src.restricciones import detectar_todos
 from src.models import PropuestaHorario, Sesion, Tecnologia
-from sph_m2.parametros import Parametros
-from sph_m2.indice import ContextoValidacion
-from sph_m2.validador import ValidadorRestricciones, multiconjunto
+from sph.parametros import Parametros
+from sph.indice import ContextoValidacion
+from sph.validador import ValidadorRestricciones, multiconjunto
 
 
 def _comparar(prop, docs, aulas):

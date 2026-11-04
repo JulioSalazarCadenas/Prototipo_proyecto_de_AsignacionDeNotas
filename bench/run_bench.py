@@ -2,10 +2,10 @@
 import json, sys, time, statistics, platform
 from dataclasses import replace
 from src.restricciones import detectar_todos
-from sph_m2.parametros import Parametros
-from sph_m2.indice import ContextoValidacion
-from sph_m2.validador import ValidadorRestricciones
-from sph_m2.resolutor import Resolutor
+from sph.parametros import Parametros
+from sph.indice import ContextoValidacion
+from sph.validador import ValidadorRestricciones
+from sph.resolutor import Resolutor
 from .sintetico import generar
 from .ingenuo import evaluar_candidato, resolver_ingenuo
 

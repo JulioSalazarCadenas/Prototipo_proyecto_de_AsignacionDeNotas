@@ -18,24 +18,24 @@ def _hashes(base):
 
 def test_agregar_regla_y_cambiar_parametro_sin_editar_codigo_existente():
     with tempfile.TemporaryDirectory() as tmp:
-        shutil.copytree(os.path.join(RAIZ, "sph_m2"), os.path.join(tmp, "sph_m2"), ignore=shutil.ignore_patterns("__pycache__"))
+        shutil.copytree(os.path.join(RAIZ, "sph"), os.path.join(tmp, "sph"), ignore=shutil.ignore_patterns("__pycache__"))
         shutil.copytree(os.path.join(RAIZ, "src"), os.path.join(tmp, "src"), ignore=shutil.ignore_patterns("__pycache__"))
         antes = _hashes(tmp)
-        shutil.copy(os.path.join(RAIZ, "ejemplos_cambio", "reglas_rd11.py"), os.path.join(tmp, "sph_m2", "reglas_rd11.py"))
+        shutil.copy(os.path.join(RAIZ, "ejemplos_cambio", "reglas_rd11.py"), os.path.join(tmp, "sph", "reglas_rd11.py"))
         shutil.copy(os.path.join(RAIZ, "ejemplos_cambio", "parametros_2027-1.json"), os.path.join(tmp, "parametros_2027-1.json"))
         despues = _hashes(tmp)
         modificados = [k for k in antes if despues.get(k) != antes[k]]
         nuevos = sorted(set(despues) - set(antes))
-        assert modificados == [] and set(nuevos) == {os.path.join("sph_m2", "reglas_rd11.py"), "parametros_2027-1.json"}
+        assert modificados == [] and set(nuevos) == {os.path.join("sph", "reglas_rd11.py"), "parametros_2027-1.json"}
         guion = textwrap.dedent('''
             import random
             from dataclasses import replace
             from src.datos_prueba import crear_docentes, crear_aulas, crear_propuesta_horario
             from src.models import Sesion
-            from sph_m2.parametros import Parametros
-            from sph_m2.indice import ContextoValidacion
-            from sph_m2.validador import ValidadorRestricciones
-            from sph_m2.resolutor import Resolutor
+            from sph.parametros import Parametros
+            from sph.indice import ContextoValidacion
+            from sph.validador import ValidadorRestricciones
+            from sph.resolutor import Resolutor
             P = Parametros.desde_json("parametros_2027-1.json")
             assert P.limite_cupo() == 38
             docs, aulas, prop = crear_docentes(), crear_aulas(), crear_propuesta_horario()

@@ -1,8 +1,8 @@
 """La optimización no cambia las decisiones: misma trayectoria que la línea base con copia + revalidación completa."""
 from bench.sintetico import generar
 from bench.ingenuo import resolver_ingenuo
-from sph_m2.parametros import Parametros
-from sph_m2.resolutor import Resolutor
+from sph.parametros import Parametros
+from sph.resolutor import Resolutor
 
 
 def test_misma_trayectoria():
