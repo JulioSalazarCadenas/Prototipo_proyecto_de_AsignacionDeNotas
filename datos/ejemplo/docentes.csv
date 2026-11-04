@@ -1,0 +1,11 @@
+id,nombre,dedicacion,especialidad,disponibilidad
+D01,Ana Torres,tiempo_completo,Algoritmos,
+D02,Carlos Peña,tiempo_completo,Bases de Datos,
+D03,Diana Ruiz,tres_cuartos,Redes,Lunes 7-13;Miércoles 7-13;Viernes 7-13
+D04,Esteban Gómez,medio_tiempo,Matemáticas,Martes 16-22;Jueves 16-22
+D05,Fabiola Nieto,tiempo_completo,Ingeniería de Software,
+D06,Germán Salas,un_cuarto,Electiva,
+D07,Helena Prieto,tres_cuartos,Sistemas Operativos,
+D08,Iván Cortés,tiempo_completo,Arquitectura de Software,
+D09,Julia Méndez,medio_tiempo,Física,
+D10,Kevin Rojas,tiempo_completo,Inteligencia Artificial,

@@ -1,0 +1,9 @@
+id,nombre,capacidad,tecnologias,accesible
+A01,Salón 301,45,video_beam,0
+A02,Salón 302,45,video_beam,0
+A03,Lab. Cómputo 1,30,computadores;video_beam,0
+A04,Lab. Cómputo 2,30,computadores;video_beam,0
+A05,Salón 205,20,,0
+A06,Sala Telepresencia,25,telepresencia;video_beam,1
+A07,Salón 210 (accesible),35,video_beam,1
+A08,Salón 110,40,video_beam,0

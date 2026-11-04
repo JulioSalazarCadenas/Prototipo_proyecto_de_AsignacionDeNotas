@@ -1,0 +1,21 @@
+codigo,curso,grupo,dia,hora_inicio,hora_fin,docente_id,aula_id,cupo,tecnologias
+S01,Estructuras de Datos,SIS-3A,Lunes,7,9,D01,A01,40,
+S02,Bases de Datos I,SIS-3A,Martes,9,11,D02,A03,30,computadores
+S03,Redes de Computadores,SIS-4A,Lunes,7,9,D03,A02,35,
+S04,Cálculo Diferencial,SIS-1A,Martes,16,18,D04,A05,20,
+S05,Ingeniería de Software I,SIS-5A,Miércoles,9,11,D05,A01,40,
+S06,Electiva de Profundización,SIS-6A,Jueves,14,16,D06,A05,18,
+S07,Sistemas Operativos,SIS-4A,Viernes,9,11,D07,A03,30,computadores
+S08,Arquitectura de Software,SIS-6A,Martes,7,9,D08,A02,35,
+S09,Física Mecánica,SIS-1A,Jueves,11,13,D09,A05,20,
+S10,Inteligencia Artificial,SIS-7A,Miércoles,14,16,D10,A06,25,video_beam
+S11,Estructuras de Datos,SIS-3A,Miércoles,7,9,D01,A01,40,
+S12,Bases de Datos I,SIS-3A,Jueves,9,11,D02,A04,30,computadores
+S13,Redes de Computadores,SIS-4A,Miércoles,7,9,D03,A02,35,
+S14,Ingeniería de Software I,SIS-5B,Viernes,9,11,D05,A01,46,
+S15,Proyecto de Telepresencia,SIS-7A,Viernes,14,16,D10,A06,22,telepresencia
+S16,Electiva de Bases de Datos,SIS-6A,Martes,10,12,D02,A08,30,
+S17,Cátedra Institucional,SIS-1B,Lunes,8,12,D06,A01,40,
+S18,Sistemas Operativos (Laboratorio),SIS-4A,Lunes,8,10,D07,A08,30,
+S19,Redes Avanzadas,SIS-4A,Jueves,16,18,D03,A08,30,
+S20,Minería de Datos,SIS-7A,Viernes,16,18,D10,A05,30,computadores
