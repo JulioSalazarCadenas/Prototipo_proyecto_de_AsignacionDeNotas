@@ -1,0 +1,74 @@
+codigo,curso,grupo,dia,hora_inicio,hora_fin,docente_id,aula_id,cupo,tecnologias
+S01,Cátedra Institucional,SIS-1A,Miércoles,19,21,D06,A09,36,
+S02,Bases de Datos I,SIS-3B,Lunes,7,9,D02,A02,18,computadores
+S03,Redes de Computadores,SIS-4A,Lunes,7,9,D03,A03,27,
+S04,Computación en la Nube,SIS-6A,Lunes,8,10,D27,A04,21,computadores
+S05,Arquitectura de Software,SIS-5A,Martes,7,9,D08,A01,30,
+S06,Estructuras de Datos,SIS-3B,Lunes,7,9,D01,A01,37,
+S07,Redes Avanzadas,SIS-7A,Lunes,11,13,D03,A07,34,
+S08,Trabajo de Grado,SIS-8A,Lunes,16,18,D23,A06,30,
+S09,Física Mecánica,SIS-1A,Lunes,20,22,D09,A03,33,
+S10,Ingeniería de Software I,SIS-5A,Martes,7,9,D05,A08,37,
+S11,Inglés Técnico I,SIS-2A,Martes,8,10,D24,A03,30,
+S12,Física Electromagnética,SIS-3A,Martes,8,10,D25,A06,25,
+S13,Sistemas Operativos,SIS-4A,Martes,8,10,D07,A13,25,computadores
+S14,Ingeniería de Software II,SIS-6A,Martes,8,11,D17,A07,35,
+S15,Ciencia de Datos Aplicada,SIS-8A,Martes,8,10,D30,A20,19,computadores
+S16,Seguridad Informática,SIS-5A,Martes,9,11,D22,A14,47,
+S17,Trabajo de Grado,SIS-8A,Martes,10,12,D23,A03,30,
+S18,Cálculo Integral,SIS-2A,Martes,13,15,D11,A08,40,
+S19,Seminario de Investigación,SIS-8A,Martes,13,15,D28,A07,35,
+S20,Programación Orientada a Objetos,SIS-2A,Martes,16,18,D14,A13,23,computadores
+S21,Cálculo Diferencial,SIS-1B,Martes,17,19,D04,A06,25,
+S22,Bases de Datos II,SIS-4A,Martes,17,19,D16,A03,28,computadores
+S23,Gestión de Proyectos,SIS-6A,Martes,17,19,D23,A04,30,
+S24,Aprendizaje Automático,SIS-8A,Martes,17,19,D21,A20,18,computadores
+S25,Cálculo Diferencial,SIS-1A,Martes,19,21,D04,A13,27,
+S26,Álgebra Lineal,SIS-2A,Martes,19,21,D12,A03,27,
+S27,Ética y Sociedad,SIS-3A,Martes,19,21,D18,A08,40,
+S28,Física Mecánica,SIS-1B,Martes,20,22,D09,A04,26,
+S29,Sistemas Operativos,SIS-4A,Miércoles,7,9,D07,A13,25,computadores
+S30,Ciencia de Datos Aplicada,SIS-8A,Miércoles,7,9,D30,A03,19,computadores
+S31,Cálculo Integral,SIS-2A,Miércoles,8,10,D11,A08,40,
+S32,Redes Avanzadas,SIS-7A,Jueves,16,18,D03,A07,34,
+S33,Física Mecánica,SIS-1A,Miércoles,10,12,D09,A07,33,
+S34,Redes de Computadores,SIS-4A,Miércoles,10,12,D03,A13,27,
+S35,Proyecto de Telepresencia,SIS-7A,Miércoles,13,15,D19,A06,22,telepresencia
+S36,Estructuras de Datos,SIS-3A,Miércoles,15,17,D01,A08,37,
+S37,Bases de Datos I,SIS-3B,Miércoles,15,17,D02,A03,18,computadores
+S38,Programación Orientada a Objetos,SIS-2A,Miércoles,16,18,D14,A13,23,computadores
+S39,Electiva de Profundización,SIS-6A,Miércoles,18,20,D28,A03,29,
+S40,Ética y Sociedad,SIS-3A,Miércoles,19,21,D18,A08,40,
+S41,Estructuras de Datos,SIS-3B,Miércoles,19,21,D01,A09,37,
+S42,Seguridad Informática,SIS-5A,Jueves,7,9,D22,A14,47,
+S43,Fundamentos de Programación,SIS-1A,Jueves,8,10,D13,A13,18,computadores
+S44,Análisis de Algoritmos,SIS-4A,Jueves,10,12,D26,A08,39,
+S45,Ingeniería de Requisitos,SIS-5A,Jueves,13,15,D29,A07,33,
+S46,Inteligencia Artificial,SIS-7A,Jueves,14,16,D10,A13,26,
+S47,Cálculo Diferencial,SIS-1A,Jueves,16,18,D04,A13,27,
+S48,Física Mecánica,SIS-1B,Jueves,18,20,D09,A04,26,
+S49,Minería de Datos,SIS-7A,Jueves,18,20,D30,A03,23,computadores
+S50,Bases de Datos II,SIS-4A,Jueves,19,21,D16,A13,28,computadores
+S51,Cálculo Diferencial,SIS-1B,Jueves,20,22,D04,A06,25,
+S52,Inglés Técnico I,SIS-2A,Viernes,7,10,D24,A03,30,
+S53,Gestión de Proyectos,SIS-6A,Viernes,8,10,D23,A04,30,
+S54,Seminario de Investigación,SIS-8A,Viernes,8,10,D28,A07,35,
+S55,Física Electromagnética,SIS-3A,Viernes,9,11,D25,A06,25,
+S56,Ingeniería de Requisitos,SIS-5A,Viernes,10,12,D29,A07,33,
+S57,Minería de Datos,SIS-7A,Viernes,10,12,D30,A13,23,computadores
+S58,Fundamentos de Programación,SIS-1A,Viernes,13,15,D13,A13,18,computadores
+S59,Bases de Datos I,SIS-3A,Viernes,13,15,D02,A03,20,computadores
+S60,Electiva de Profundización,SIS-6A,Viernes,14,16,D28,A04,29,
+S61,Cátedra Institucional,SIS-1A,Viernes,15,17,D06,A08,36,
+S62,Álgebra Lineal,SIS-2A,Viernes,18,20,D12,A13,27,
+S63,Aprendizaje Automático,SIS-8A,Viernes,18,20,D21,A03,18,computadores
+S64,Ingeniería de Software II,SIS-6A,Viernes,19,21,D17,A07,35,
+S65,Proyecto de Telepresencia,SIS-7A,Viernes,20,22,D19,A06,22,telepresencia
+S66,Bases de Datos I,SIS-3A,Lunes,7,9,D02,A11,20,computadores
+S67,Análisis de Algoritmos,SIS-4A,Sábado,7,9,D26,A08,39,
+S68,Arquitectura de Software,SIS-5A,Sábado,7,9,D08,A03,30,
+S69,Computación en la Nube,SIS-6A,Sábado,8,10,D27,A04,21,computadores
+S70,Inteligencia Artificial,SIS-7A,Sábado,8,10,D10,A16,26,
+S71,Ingeniería de Software I,SIS-5A,Sábado,9,11,D05,A09,37,
+S72,Estructuras de Datos,SIS-3A,Lunes,10,12,D01,A01,37,
+S73,Cátedra Institucional,SIS-1A,Jueves,10,12,D06,A09,36,

@@ -1,0 +1,21 @@
+id,nombre,capacidad,tecnologias,accesible
+A01,Salón 301,45,video_beam,0
+A02,Salón 302,45,video_beam,0
+A03,Lab. Cómputo 1,30,computadores;video_beam,0
+A04,Lab. Cómputo 2,30,computadores;video_beam,0
+A05,Salón 205,20,,0
+A06,Sala Telepresencia,25,telepresencia;video_beam,1
+A07,Salón 210 (accesible),35,video_beam,1
+A08,Salón 110,40,video_beam,0
+A09,Salón 303,40,video_beam,0
+A10,Salón 304,40,video_beam,0
+A11,Lab. Cómputo 3,35,computadores;video_beam,0
+A12,Lab. Cómputo 4,35,computadores;video_beam,0
+A13,Lab. Redes,28,computadores;video_beam,0
+A14,Salón 401,50,video_beam,0
+A15,Auditorio Menor,50,video_beam;sillas_moviles,1
+A16,Salón 402,30,video_beam,0
+A17,Sala de Seminarios,20,video_beam;sillas_moviles,0
+A18,Salón 105,32,video_beam,0
+A19,Salón 106,32,video_beam,0
+A20,Lab. Cómputo 5,30,computadores;video_beam,0

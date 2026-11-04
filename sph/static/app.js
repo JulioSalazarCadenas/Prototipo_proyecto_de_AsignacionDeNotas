@@ -56,8 +56,8 @@ function pintar() {
   ligarHorario();
 }
 function vacio() {
-  return `<div class="tarjeta vacio"><h1>Sistema de Planeación de Horarios</h1><p>Todavía no hay datos cargados. Cargue la demostración (10 docentes, 8 aulas y 20 sesiones con 11 conflictos sembrados) o sus propios archivos CSV.</p>
-  <p><button class="btn primario" data-a="demo">Cargar datos de demostración</button> <button class="btn" data-a="cargar">Subir mis CSV</button></p></div>`;
+  return `<div class="tarjeta vacio"><h1>Sistema de Planeación de Horarios</h1><p>Todavía no hay datos cargados. Cargue una demostración (la ampliada trae 30 docentes, 20 aulas y 73 sesiones con 14 conflictos sembrados) o sus propios archivos CSV.</p>
+  <p><button class="btn primario" data-a="demo-ampliada">Demostración ampliada (30 docentes, 20 aulas, 73 sesiones)</button> <button class="btn" data-a="demo">Demostración pequeña (10 / 8 / 20)</button> <button class="btn" data-a="cargar">Subir mis CSV</button></p></div>`;
 }
 function vistaHorario() {
   const claves = clavesVista();
@@ -180,7 +180,8 @@ function ventanaResolver() {
    <label><input type="checkbox" id="r-doc"> permitir cambiar docente</label></div><p><button class="btn primario" data-a="resolver-simular">Simular</button></p>`);
 }
 function ventanaCargar() {
-  modal(`<h2>Cargar datos</h2><p><button class="btn primario" data-a="demo">Cargar datos de demostración</button> <span class="pie">(reemplaza los datos actuales)</span></p><hr>
+  modal(`<h2>Cargar datos</h2><p><button class="btn primario" data-a="demo-ampliada">Demostración ampliada: 30 docentes, 20 aulas, 73 sesiones (14 conflictos)</button></p>
+   <p><button class="btn" data-a="demo">Demostración pequeña: 10 docentes, 8 aulas, 20 sesiones (11 conflictos)</button> <span class="pie">(cualquiera de las dos reemplaza los datos actuales)</span></p><hr>
    <p>O suba sus tres archivos CSV (UTF-8). Si hay errores se listan todos y <b>no se cambia nada</b>.</p>
    <div class="fila"><label style="width:7rem">docentes.csv</label><input type="file" id="f-docentes" accept=".csv"></div>
    <div class="fila"><label style="width:7rem">aulas.csv</label><input type="file" id="f-aulas" accept=".csv"></div>
@@ -223,6 +224,7 @@ document.addEventListener("click", async e => {
     case "validar": { const r = await api("/api/validar", {}); await recargar(r.mensaje); break; }
     case "cargar": ventanaCargar(); break;
     case "demo": await importar({ demo: true }); break;
+    case "demo-ampliada": await importar({ demo: "ampliada" }); break;
     case "subir": await subir(); break;
     case "parametros": {
       const valores = {}; document.querySelectorAll("[data-par]").forEach(i => valores[i.dataset.par] = i.value.trim());

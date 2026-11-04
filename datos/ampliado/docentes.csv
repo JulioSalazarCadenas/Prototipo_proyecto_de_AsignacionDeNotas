@@ -1,0 +1,31 @@
+id,nombre,dedicacion,especialidad,disponibilidad
+D01,Ana Torres,tiempo_completo,Algoritmos,
+D02,Carlos Peña,tiempo_completo,Bases de Datos,
+D03,Diana Ruiz,tres_cuartos,Redes,Lunes 7-13;Miércoles 7-13;Viernes 7-13
+D04,Esteban Gómez,medio_tiempo,Matemáticas,Martes 16-22;Jueves 16-22
+D05,Fabiola Nieto,tiempo_completo,Ingeniería de Software,
+D06,Germán Salas,un_cuarto,Electiva,
+D07,Helena Prieto,tres_cuartos,Sistemas Operativos,
+D08,Iván Cortés,tiempo_completo,Arquitectura de Software,
+D09,Julia Méndez,medio_tiempo,Física,
+D10,Kevin Rojas,tiempo_completo,Inteligencia Artificial,
+D11,Laura Beltrán,tiempo_completo,Matemáticas,
+D12,Mauricio Vargas,tres_cuartos,Matemáticas,
+D13,Natalia Ospina,medio_tiempo,Programación,
+D14,Oscar Dávila,tiempo_completo,Programación,
+D15,Paula Herrera,medio_tiempo,Programación,Lunes 7-18;Martes 7-18;Miércoles 7-18;Jueves 7-18
+D16,Ricardo Suárez,tres_cuartos,Bases de Datos,
+D17,Sandra Lozano,medio_tiempo,Ingeniería de Software,
+D18,Tomás Arévalo,un_cuarto,Ética y Sociedad,
+D19,Úrsula Mejía,medio_tiempo,Redes,
+D20,Víctor Camacho,tres_cuartos,Sistemas Operativos,
+D21,Wendy Castaño,medio_tiempo,Inteligencia Artificial,
+D22,Xavier Montoya,tiempo_completo,Seguridad Informática,
+D23,Yuliana Pardo,medio_tiempo,Gestión de Proyectos,
+D24,Zulma Forero,un_cuarto,Inglés Técnico,
+D25,Andrés Quintero,tres_cuartos,Física,
+D26,Beatriz Navarro,medio_tiempo,Algoritmos,Martes 7-22;Jueves 7-22;Sábado 7-13
+D27,Camilo Reyes,tiempo_completo,Computación en la Nube,
+D28,Daniela Ortiz,medio_tiempo,Electiva,
+D29,Felipe Granados,medio_tiempo,Ingeniería de Requisitos,
+D30,Gloria Martínez,tres_cuartos,Ciencia de Datos,

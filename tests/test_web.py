@@ -128,3 +128,16 @@ def test_http_rechaza_origen_ajeno_y_json_invalido(servidor):
     with pytest.raises(urllib.error.HTTPError) as e:
         urllib.request.urlopen(req)
     assert e.value.code == 400
+
+
+def test_demostracion_ampliada(tmp_path):
+    a = web.Aplicacion(str(tmp_path / "amp.db"))
+    r = a.importar({"demo": "ampliada"})
+    assert r["rechazado"] is False
+    est = r["estado"]
+    assert (len(est["docentes"]), len(est["aulas"]), len(est["sesiones"])) == (30, 20, 73)
+    assert est["resumen"]["total"] == 14
+    assert {c["tipo"] for c in est["conflictos"]} == {f"RD-{n:02d}" for n in range(1, 11)}   # una o más por cada regla dura
+    res = a.resolver({"aplicar": True})
+    assert res["finales"] < res["iniciales"] and res["finales"] == 5
+    assert a.importar({"demo": True})["estado"]["resumen"]["total"] == 11                    # la pequeña sigue disponible

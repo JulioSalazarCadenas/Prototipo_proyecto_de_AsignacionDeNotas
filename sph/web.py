@@ -13,7 +13,8 @@ from .criterios import Compuesto
 from .servicio import ServicioHorarios, MovimientoBloqueado, SinCambiosParaDeshacer
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DEMO = os.path.join(RAIZ, "datos", "ejemplo")
+DEMO = os.path.join(RAIZ, "datos", "ejemplo")                  # 10 docentes, 8 aulas, 20 sesiones
+DEMO_AMPLIADA = os.path.join(RAIZ, "datos", "ampliado")        # 30 docentes, 20 aulas, 73 sesiones
 ESTATICOS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "static")
 TIPOS = {".html": "text/html; charset=utf-8", ".css": "text/css; charset=utf-8", ".js": "text/javascript; charset=utf-8"}
 _CERRADURA = threading.Lock()
@@ -233,7 +234,7 @@ class Aplicacion:
         except ValueError as e:
             raise ErrorApi(str(e)) from None
         if d.get("demo"):
-            carpeta, tmp = DEMO, None
+            carpeta, tmp = (DEMO_AMPLIADA if d.get("demo") == "ampliada" else DEMO), None
         else:
             tmp = tempfile.TemporaryDirectory()
             carpeta = tmp.name
