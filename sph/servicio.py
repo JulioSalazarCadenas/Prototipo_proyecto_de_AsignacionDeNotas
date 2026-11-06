@@ -16,7 +16,6 @@ from .resolutor import Resolutor
 from .reglas import REGISTRO
 from .validador import ValidadorRestricciones, por_tipo, descubrir_reglas
 
-
 class MovimientoBloqueado(Exception):
     """El movimiento crea (o agrava) conflictos de al menos una regla dura."""
 
