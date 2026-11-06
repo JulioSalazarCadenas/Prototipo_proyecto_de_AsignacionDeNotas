@@ -340,7 +340,6 @@ def crear_manejador(app: Aplicacion):
 def crear_servidor(bd, puerto=8000, anfitrion="127.0.0.1"):
     return ThreadingHTTPServer((anfitrion, puerto), crear_manejador(Aplicacion(bd)))
 
-
 def servir(bd, puerto=8000, abrir=True):
     srv = crear_servidor(bd, puerto)
     url = f"http://127.0.0.1:{srv.server_address[1]}/"
