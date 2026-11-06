@@ -55,6 +55,7 @@ def test_agregar_regla_y_cambiar_parametro_sin_editar_codigo_existente():
                 assert d == real, (d, real)
             print("OK", tipos)
         ''')
+        
         out = subprocess.run([sys.executable, "-I", "-c", "import sys; sys.path.insert(0, '.')\n" + guion], cwd=tmp,
                              capture_output=True, text=True)
         assert out.returncode == 0, out.stderr + out.stdout
