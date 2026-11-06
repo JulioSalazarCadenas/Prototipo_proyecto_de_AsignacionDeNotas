@@ -96,7 +96,7 @@ def test_importar_otro_semestre_exige_fechas_validas(tmp_path):
     for extra in ({}, {"inicio": "2027-01-25", "fin": "2027-01-20"}, {"inicio": "25/01/2027", "fin": "2027-05-30"}):
         with pytest.raises(web.ErrorApi):
             a.importar({**base, **extra})
-    assert not os.path.exists(str(tmp_path / "s.db"))                    # nada se escribió
+    assert not os.path.exists(str(tmp_path / "s.db"))                    
     assert a.importar({**base, "inicio": "2027-01-25", "fin": "2027-05-30"})["rechazado"] is False
     fila = sqlite3.connect(str(tmp_path / "s.db")).execute("SELECT * FROM semestre").fetchall()
     assert fila == [("2027-1", "2027-01-25", "2027-05-30")]
@@ -137,7 +137,7 @@ def test_demostracion_ampliada(tmp_path):
     est = r["estado"]
     assert (len(est["docentes"]), len(est["aulas"]), len(est["sesiones"])) == (30, 20, 73)
     assert est["resumen"]["total"] == 14
-    assert {c["tipo"] for c in est["conflictos"]} == {f"RD-{n:02d}" for n in range(1, 11)}   # una o más por cada regla dura
+    assert {c["tipo"] for c in est["conflictos"]} == {f"RD-{n:02d}" for n in range(1, 11)}   
     res = a.resolver({"aplicar": True})
     assert res["finales"] < res["iniciales"] and res["finales"] == 5
-    assert a.importar({"demo": True})["estado"]["resumen"]["total"] == 11                    # la pequeña sigue disponible
+    assert a.importar({"demo": True})["estado"]["resumen"]["total"] == 11                   
